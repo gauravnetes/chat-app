@@ -6,12 +6,12 @@ const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore()
   const [ selectedImage, setSelectedImage ] = useState(null)
   const hanldleImageUpload = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0] // get the file selected by user
     if(!file) return; 
 
-    const reader = new FileReader()
+    const reader = new FileReader() // reader to read the file as a string
 
-    reader.readAsDataURL(file); 
+    reader.readAsDataURL(file);  // read the file 
 
     reader.onload = async () => {
       const base64Image = reader.result; 
