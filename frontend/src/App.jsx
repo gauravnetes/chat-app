@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar"
-
 import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage"
 import SettingsPage from "./pages/SettingsPage"
@@ -13,9 +12,10 @@ import { Toaster } from "react-hot-toast"
 import { useThemeStore } from "./store/useThemeStore"
 function App() {
 
-  const { authUser, checkAuth, isCheckingAuth } = useAuthStore()
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore()
   const { theme } = useThemeStore()
-
+  
+  console.log({ onlineUsers })
   useEffect(() => {
     checkAuth()
   }, [checkAuth])
