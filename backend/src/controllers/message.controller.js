@@ -1,4 +1,5 @@
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js"
 
@@ -62,7 +63,12 @@ export const sendMessage = async (req, res) => {
         await newMsg.save()
 
         // TODO: realtime messaging to be implemented with socket.io
-
+        const receiverSocketId = getReceiverSocketId(receiverId)
+        
+        if (receiverSocketId) {
+            // only emit it to receiverSocketId as it's a private chat
+            io.to(receiverSocketId).emit("newMsg", newMsg); 
+        }
         res.status(201).json(newMsg)
     } catch (error) {
         console.log("Error in sendMessage controller: ", error.message); 
