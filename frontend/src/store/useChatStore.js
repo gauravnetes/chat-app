@@ -45,7 +45,6 @@ export const useChatStore = create((set, get) => ({
     }
   },  
 
-  // Todo: Optimize it later
   subscribeToMessages: () => {
     const { selectedUser } = get()
     if(!selectedUser) return
@@ -53,6 +52,9 @@ export const useChatStore = create((set, get) => ({
     const socket = useAuthStore.getState().socket; 
 
     socket.on("newMsg", (newMsg) => {
+      const isMsgSentFromSelectedUser = newMsg.senderId === selectedUser._id; 
+
+      if(!isMsgSentFromSelectedUser) return; 
       // get all the prev messages in History and add the newMsg in the end 
       set({
         messages: [...get().messages, newMsg]
