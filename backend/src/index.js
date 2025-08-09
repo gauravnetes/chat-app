@@ -1,3 +1,7 @@
+console.log("--- RENDER ENVIRONMENT VARIABLES ---");
+console.log(JSON.stringify(process.env, null, 2));
+console.log("------------------------------------");
+
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
