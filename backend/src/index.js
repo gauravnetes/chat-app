@@ -23,7 +23,7 @@ const PORT = process.env.PORT;
 // // run this beofore calling any routes as the routes will be needing
 // // parsing json data which won't work if run before express.json() middleware
 app.use(express.json({ limit: "30mb" }));
-// app.use(cookieParser());
+app.use(cookieParser());
 // app.use(
 //   cors({
 //     origin: "http://localhost:5173",
